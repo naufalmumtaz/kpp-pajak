@@ -1,5 +1,5 @@
 <?php
-require '/functions.php';
+require 'functions.php';
 
 $id = $_GET['id'];
 if(hapusWajibPajak($id) > 0) {

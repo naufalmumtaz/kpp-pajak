@@ -39,8 +39,10 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 	$tgl_terima = date("Y-m-d", strtotime($data->val($i, 10)));
 	$tgl_tahap_1 = $data->val($i, 11);
 	$tgl_tahap_2 = $data->val($i, 12);
+	$petugas = $data->val($i, 13);
+	$ket = $data->val($i, 14);
 
-	$result = mysqli_query($conn, "INSERT INTO wajibpajak VALUES('', '$npwp', '$bps', '$tgl_spt', '$nilai_lb', '$masa_pajak', '$jenis', '$sumber', '$pembetulan', '$tgl_terima', '$tgl_tahap_1', '$tgl_tahap_2')");
+	$result = mysqli_query($conn, "INSERT INTO wajibpajak VALUES('', '$npwp', '$bps', '$tgl_spt', '$nilai_lb', '$masa_pajak', '$jenis', '$sumber', '$pembetulan', '$tgl_terima', '$tgl_tahap_1', '$tgl_tahap_2', '$petugas', '$ket')");
 	$berhasil++;
 }
 
