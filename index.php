@@ -40,8 +40,9 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
               <img src="images/user.png" alt="icon" style="width:2em;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal"><i class="bi bi-file-earmark-plus"></i> Impor Data</button></li>
-              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#exportModal"><i class="bi bi-file-earmark-arrow-up"></i> Expor Data</button></li>
+              <li><a href="tambah.php" class="dropdown-item"><i class="bi bi-plus-lg me-2"></i> Tambah Data</a></li>
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal"><i class="bi bi-file-earmark-plus me-2"></i> Impor Data</button></li>
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#exportModal"><i class="bi bi-file-earmark-arrow-up me-2"></i> Expor Data</button></li>
               <hr>
               <li><button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
             </ul>

@@ -12,6 +12,21 @@ function query($query) {
 
   return $rows;
 }
+function tambahWajibPajak($data) {
+  global $conn;
+
+	$npwp = htmlspecialchars($data['npwp']);
+	$bps = htmlspecialchars($data['bps']);
+	$nilai_lb = htmlspecialchars($data['nilai_lb']);
+	$tgl_terima = htmlspecialchars($data['tgl_terima']);
+	$petugas = htmlspecialchars($data['petugas']);
+	$ket = htmlspecialchars($data['ket']);
+
+	$query = "INSERT INTO wajibpajak (npwp, bps, nilai_lb, tgl_terima, petugas, ket) VALUES('$npwp', '$bps', '$nilai_lb', '$tgl_terima', '$petugas', '$ket')";
+  mysqli_query($conn, $query);
+
+  return mysqli_affected_rows($conn);
+}
 function ubahWajibPajak($data) {
   global $conn;
 
