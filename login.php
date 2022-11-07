@@ -80,7 +80,8 @@ if(isset($_POST["login"])) {
             <label for="rememberme" class="form-check-label">Remember Me</label>
           </div>
           <div class="d-grid gap-2 mb-3">
-            <button type="submit" name="login" class="btn btn-dark btn-lg border-0 rounded-0">Login</button>
+            <button type="submit" name="login" class="btn btn-dark border-0 py-3 mt-3 rounded-0">Login</button>
+            <a href="index.php" class="btn btn-secondary border-0 py-3 rounded-0">Kembali</a>
           </div>
         </form>
       </div>

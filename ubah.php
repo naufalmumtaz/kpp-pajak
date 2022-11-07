@@ -43,8 +43,36 @@ if(isset($_POST['ubah'])) {
 </head>
 <body>
   
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">KPP Pratama Karanganyar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <?php if(isset($_SESSION["login"])) : ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="images/user.png" alt="icon" style="width:2em;">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal"><i class="bi bi-plus-lg"></i> Impor Data</button></li>
+              <hr>
+              <li><button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
+            </ul>
+          </li>
+        <?php else : ?>
+          <li class="nav-item">
+            <a href="login.php" class="btn btn-success">Login</a>
+          </li>
+        <?php endif; ?>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<section>
+<section style="margin-top:3em;">
   <div class="container p-5">
     <div class="row">
       <div class="col-12 col-lg-12">

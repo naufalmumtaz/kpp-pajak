@@ -26,7 +26,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">KPP Pratama Karanganyar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,8 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
               <img src="images/user.png" alt="icon" style="width:2em;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal"><i class="bi bi-plus-lg"></i> Impor Data</button></li>
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal"><i class="bi bi-file-earmark-plus"></i> Impor Data</button></li>
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#exportModal"><i class="bi bi-file-earmark-arrow-up"></i> Expor Data</button></li>
               <hr>
               <li><button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
             </ul>
@@ -55,7 +56,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   </div>
 </nav>
 
-<section>
+<section style="margin-top:5em;">
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-12">
@@ -237,6 +238,27 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   </div>
 </div>
 
+<!-- exportModal -->
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Expor Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-4">
+          <p>Klik expor jika anda ingin mengexpor data ke excel.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+          <a href="export_excel.php" target="_blank" rel="noopener noreferrer" class="btn btn-success">Expor</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- logoutModal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -263,7 +285,14 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
 <script>
   $(document).ready(function () {
     $('#table').DataTable({
-      responsive: true
+      responsive: true,
+      "language": {
+        "lengthMenu": "Tampilkan _MENU_ data per halaman",
+        "zeroRecords": "Data tidak ditemukan",
+        "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+        "infoEmpty": "Data belum dibuat",
+        "infoFiltered": "(dicari dari _MAX_ total data)"
+      }
     });
   });
 </script>
