@@ -1,5 +1,4 @@
 <?php
-
 // koneksi ke DB
 $conn = mysqli_connect("localhost:3308", "root", "", "kpp-pajak");
 

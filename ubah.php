@@ -1,9 +1,16 @@
 <?php
+session_start();
+if(!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
+
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
 $id = $_GET['id'];
 $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND id = $id")[0];
+$users = query("SELECT * FROM users");
 
 if(isset($_POST['ubah'])) {
   if(ubahWajibPajak($_POST) > 0) {
@@ -30,18 +37,12 @@ if(isset($_POST['ubah'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Wajib Pajak - Admin</title>
+  <title>Edit Wajib Pajak - Admin</title>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-
-  <!-- DataTable CSS -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <?php include('includes/style.php'); ?>
 </head>
 <body>
+  
 
 <section>
   <div class="container p-5">
@@ -107,14 +108,11 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="petugas" clas="form-label">Petugas</label>
-                  <input class="form-control" name="petugas" list="list-petugas" id="petugas" placeholder="Cari petugas...">
-                  <datalist id="list-petugas">
-                    <option value="Adang">
-                    <option value="New York">
-                    <option value="Seattle">
-                    <option value="Los Angeles">
-                    <option value="Chicago">
-                  </datalist>
+                  <select name="petugas" id="petugas" class="form-select">
+                    <?php foreach ($users as $user) : ?>
+                      <option value="<?= $user['nama'] ?>" <?= $user['nama'] === $wajibpajak['petugas'] ? 'selected' : '';?>><?= $user['nama'] ?></option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="ket" clas="form-label">Keterangan</label>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Nov 06, 2022 at 06:35 AM
+-- Generation Time: Nov 07, 2022 at 06:23 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -24,43 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wajibpajak`
+-- Table structure for table `npwp`
 --
 
-CREATE TABLE `wajibpajak` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `npwp` (
   `npwp` char(40) DEFAULT NULL,
-  `bps` char(34) DEFAULT NULL,
-  `tgl_spt` date DEFAULT NULL,
-  `nilai_lb` char(15) DEFAULT NULL,
-  `masa_pajak` date DEFAULT NULL,
-  `jenis` varchar(200) DEFAULT NULL,
-  `sumber` varchar(200) DEFAULT NULL,
-  `pembetulan` varchar(100) DEFAULT NULL,
-  `tgl_terima` date DEFAULT NULL,
-  `tgl_tahap_1` date DEFAULT NULL,
-  `tgl_tahap_2` date DEFAULT NULL
+  `nama_wp` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `npwp`
 --
 
---
--- Indexes for table `wajibpajak`
---
-ALTER TABLE `wajibpajak`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `wajibpajak`
---
-ALTER TABLE `wajibpajak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+INSERT INTO `npwp` (`npwp`, `nama_wp`) VALUES
+('805971603528000', 'MAJU JAYA'),
+('804986693528000', 'DESA AMAN'),
+('942513128528000', 'BERSAMA JAYA'),
+('022461735528001', 'ABC'),
+('015827686528000', 'DEF'),
+('829005297528000', 'GHI'),
+('612791848528000', 'JKL'),
+('210226759528000', 'MNO'),
+('314606906528000', 'GHJ');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

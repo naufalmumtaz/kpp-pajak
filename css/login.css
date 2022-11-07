@@ -1,0 +1,14 @@
+body {
+  background: url(../images/bg.avif) no-repeat;
+  background-size: cover;
+  backdrop-filter: brightness(60%);
+  -webkit-backdrop-filter: brightness(60%);
+  height: 100%;
+}
+.content {
+  height: 100vh;
+}
+.form-check-input:checked {
+  background: #212529;
+  border: #212529;
+}

@@ -2,6 +2,11 @@
 <!-- www.malasngoding.com -->
 
 <?php 
+session_start();
+if(!isset($_SESSION["login"])) {
+  header("Location: login.php");
+  exit;
+}
 // menghubungkan dengan koneksi
 include 'functions.php';
 // menghubungkan dengan library excel reader
@@ -28,7 +33,7 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 	$UNIX_DATE = ($EXCEL_DATE - 25569) * 86400;
 
 	// menangkap data dan memasukkan ke variabel sesuai dengan kolumnya masing-masing
-	$npwp = $data->val($i, 2);
+	$npwp = str_replace([".", "-", "/"], "", $data->val($i, 2));
 	$bps = $data->val($i, 3);
 	$tgl_spt = date("Y-m-d", strtotime($data->val($i, 4)));
 	$nilai_lb = $data->val($i, 5);
