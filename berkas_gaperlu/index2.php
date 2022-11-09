@@ -19,7 +19,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Wajib Pajak - Admin</title>
 
-  <?php include('includes/style.php'); ?>
+  <?php include('includes/style.html'); ?>
 
   <!-- My CSS -->
   <link rel="stylesheet" href="css/style.css">
@@ -255,7 +255,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   </div>
 </div>
 
-<?php include('includes/script.php'); ?>
+<?php include('includes/script.html'); ?>
 <script>
   $(document).ready(function () {
     $('#table').DataTable({

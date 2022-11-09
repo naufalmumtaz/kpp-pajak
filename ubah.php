@@ -39,7 +39,7 @@ if(isset($_POST['ubah'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Wajib Pajak - Admin</title>
 
-  <?php include('includes/style.php'); ?>
+  <?php include('includes/style.html'); ?>
 </head>
 <body>
   

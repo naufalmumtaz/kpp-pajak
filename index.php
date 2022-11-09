@@ -19,7 +19,8 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Wajib Pajak - Admin</title>
 
-  <?php include('includes/style.php'); ?>
+  <?php include('includes/style.html'); ?>
+  <?php include('includes/script.html'); ?>
 
   <!-- My CSS -->
   <link rel="stylesheet" href="css/style.css">
@@ -70,9 +71,9 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                 </div>
               </div>
               <div class="row mt-3">
-                <div class="col-12 table-responsive">
+                <div class="col-12">
                   <div>
-                    <div>
+                    <div class="table-responsive">
                       <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-striped table-hover">
                         <thead>
                           <tr>
@@ -85,7 +86,6 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                             <th>Nilai LB</th>
                             <th>Masa Pajak</th>
                             <th>Jenis</th>
-                            <th>Sumber</th>
                             <th>Pembetulan</th>
                             <th>Tanggal Terima</th>
                             <th>Jatuh Tempo Tahap 1</th>
@@ -114,7 +114,6 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                               <td><?php echo $wb["nilai_lb"]; ?></td>
                               <td><?php echo date("M-Y", strtotime($wb["masa_pajak"])); ?></td>
                               <td><?php echo $wb["jenis"]; ?></td>
-                              <td><?php echo $wb["sumber"]; ?></td>
                               <td><?php echo $wb["pembetulan"]; ?></td>
                               <td><?php echo date("d-m-Y", strtotime($wb["tgl_terima"])); ?></td>
 
@@ -129,7 +128,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                 ?>
                               </td> -->
                               <td><?php 
-                                  if($jatuhtempo_tahap_1 < date_create("NOW")) {
+                                  if($wb["tgl_tahap_1"] != "0000-00-00") {
                                     echo "-";
                                   } else {
                                     $date = $jatuhtempo_tahap_1;
@@ -139,9 +138,12 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                     $createDate = date_create($implodeDate);
                           
                                     $current = date_create("NOW");
-                                    $diff = date_diff($createDate, $current);
+                                    $waktu_tersisa_1 = date_diff($createDate, $current);
                           
-                                    echo $diff->format('%m bulan, %d hari');
+                                    echo $waktu_tersisa_1->format('%d hari');
+                                    if($waktu_tersisa_1->days == 21) {
+                                      $_SESSION["alert"] = true;
+                                    }
                                   }
                               ?></td>
                               <td><?php
@@ -172,9 +174,9 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                     $createDate = date_create($implodeDate);
                           
                                     $current = date_create("NOW");
-                                    $diff = date_diff($createDate, $current);
+                                    $waktu_tersisa_2 = date_diff($createDate, $current);
                           
-                                    echo $diff->format('%m bulan, %d hari');
+                                    echo $waktu_tersisa_2->format('%d hari');
                                   }
                                 }
                                 ?></td>
@@ -217,6 +219,38 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
     </div>
   </div>
 </section>
+
+<?php if($_SESSION["alert"]) : ?>
+  <script>
+    $(document).ready(function() {
+      $("#alertModal").modal("show");
+    });
+  </script>
+<?php endif ?>
+
+<!-- alertModal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-4">
+          <ul>
+            <?php foreach($wajibpajak as $wb) : ?>
+              
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- ImporModal -->
 <div class="modal fade" id="imporModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -282,7 +316,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   </div>
 </div>
 
-<?php include('includes/script.php'); ?>
+
 <script>
   $(document).ready(function () {
     $('#table').DataTable({

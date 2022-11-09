@@ -38,7 +38,7 @@ if(isset($_POST['ubah'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Wajib Pajak - Admin</title>
 
-  <?php include('includes/style.php'); ?>
+  <?php include('includes/style.html'); ?>
 </head>
 <body>
   
@@ -131,7 +131,7 @@ if(isset($_POST['ubah'])) {
   </div>
 </section>
 
-<?php include('includes/script.php') ?>
+<?php include('includes/script.html') ?>
 
 </body>
 </html>

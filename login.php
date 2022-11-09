@@ -49,7 +49,7 @@ if(isset($_POST["login"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 
-  <?php include("includes/style.php") ?>
+  <?php include("includes/style.html") ?>
   <link rel="stylesheet" href="css/login.css">
 
 </head>
@@ -89,6 +89,6 @@ if(isset($_POST["login"])) {
   </div>
 </div>
 
-<?php include("includes/script.php") ?>
+<?php include("includes/script.html") ?>
 </body>
 </html>
