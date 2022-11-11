@@ -8,7 +8,9 @@ session_start();
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp");
+$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%'");
+$tgl_terakhir_diupdate = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak ORDER BY tgl_terima DESC");
+$row = mysqli_fetch_array($tgl_terakhir_diupdate);
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +39,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
       <ul class="navbar-nav ms-auto">
         <?php if(isset($_SESSION["login"])) : ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle pill-rounded" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="images/user.png" alt="icon" style="width:2em;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -66,15 +68,16 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
           <div class="col-12 table-responsive">
             <div class="py-2">
               <div class="row">
-                <div class="col-12 d-flex align-items-center">
+                <div class="col-12">
                   <h2>Daftar WP Pengembalian Pendahuluan</h2>
+                  <p>Data Terakhir Diupdate : <?php echo date("d-m-Y", strtotime($row[0])); ?></p>
                 </div>
               </div>
               <div class="row mt-3">
                 <div class="col-12">
                   <div>
                     <div class="table-responsive">
-                      <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-striped table-hover">
+                      <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-bordered table-hover">
                         <thead>
                           <tr>
                             <th>#</th>
@@ -141,8 +144,10 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                     $waktu_tersisa_1 = date_diff($createDate, $current);
                           
                                     echo $waktu_tersisa_1->format('%d hari');
-                                    if($waktu_tersisa_1->days == 21) {
+                                    if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert"] = true;
+                                    } else {
+                                      $_SESSION["alert"] = false;
                                     }
                                   }
                               ?></td>
@@ -164,7 +169,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                 if($wb["tgl_tahap_1"] == 0 && $wb["tgl_tahap_2"] == 0) {
                                   echo "-";
                                 } else {
-                                  if($jatuhtempo_tahap_1 < date_create("NOW")) {
+                                  if($wb["tgl_tahap_1"] != "0000-00-00" && $wb["tgl_tahap_2"] != "0000-00-00") {
                                     echo "-";
                                   } else {
                                     $date = $jatuhtempo_tahap_2;
@@ -175,8 +180,13 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                           
                                     $current = date_create("NOW");
                                     $waktu_tersisa_2 = date_diff($createDate, $current);
-                          
+
                                     echo $waktu_tersisa_2->format('%d hari');
+                                    if($waktu_tersisa_2->days <= 10) {
+                                      $_SESSION["alert2"] = true;
+                                    } else {
+                                      $_SESSION["alert2"] = false;
+                                    }
                                   }
                                 }
                                 ?></td>
@@ -191,15 +201,15 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
                                 } ?>
                               </td>
                               <td>
-                                <?php echo $wb["petugas"] == null ? "-" : $wb["petugas"]; ?>
+                                <?php echo $wb["petugas"] == "" ? "-" : $wb["petugas"]; ?>
                               </td>
-                              <td><?php echo $wb["ket"] == null ? "-" : $wb["ket"]; ?></td>
+                              <td><?php echo $wb["ket"] == "" ? "-" : $wb["ket"]; ?></td>
                               <td>
-                                <?php if($wb["petugas"] == null) : ?>
+                                <?php if($wb["petugas"] == "") : ?>
                                   <?php echo "Open"; ?>
-                                <?php elseif($wb["petugas"] != null && $wb["tgl_tahap_2"] == null) : ?>
+                                <?php elseif($wb["petugas"] != "" && $wb["tgl_tahap_2"] == "0000-00-00") : ?>
                                   <?php echo "Process"; ?>
-                                <?php elseif($wb["tgl_tahap_2"] != null && $wb["petugas"] != null) : ?>
+                                <?php elseif($wb["tgl_tahap_2"] != "0000-00-00" && $wb["petugas"] != "") : ?>
                                   <?php echo "Closed"; ?>
                                 <?php endif; ?>
                               </td>
@@ -220,12 +230,20 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
   </div>
 </section>
 
-<?php if($_SESSION["alert"]) : ?>
+<?php if(isset($_SESSION["alert"])) : ?>
   <script>
     $(document).ready(function() {
       $("#alertModal").modal("show");
     });
-  </script>
+    </script>
+<?php endif ?>
+
+<?php if(isset($_SESSION["alert2"])) : ?>
+  <script>
+    $(document).ready(function() {
+      $("#alertModal2").modal("show");
+    });
+    </script>
 <?php endif ?>
 
 <!-- alertModal -->
@@ -234,14 +252,34 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
     <div class="modal-content">
       <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Peringatan!</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo Tahap 1!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-4">
           <ul>
-            <?php foreach($wajibpajak as $wb) : ?>
-              
-            <?php endforeach; ?>
+            Ada permohonan, jatuh tempo 1 kurang dari 10 hari. Silahkan cek!
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- alertModal2 -->
+<div class="modal fade" id="alertModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo Tahap 2!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-4">
+          <ul>
+            Ada permohonan, jatuh tempo 2 kurang dari 10 hari. Silahkan cek!
           </ul>
         </div>
         <div class="modal-footer">

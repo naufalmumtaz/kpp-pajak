@@ -106,11 +106,11 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="tgl_spt" clas="form-label">Tanggal SPT</label>
-                  <input type="text" name="tgl_spt" id="tgl_spt" value="<?php echo $wajibpajak["tgl_spt"]; ?>" class="form-control" readonly>
+                  <input type="text" name="tgl_spt" id="tgl_spt" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_spt"])); ?>" class="form-control" readonly>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="masa_pajak" clas="form-label">Masa Pajak</label>
-                  <input type="text" name="masa_pajak" id="masa_pajak" value="<?php echo $wajibpajak["masa_pajak"]; ?>" class="form-control" readonly>
+                  <input type="text" name="masa_pajak" id="masa_pajak" value="<?php echo date("M-Y", strtotime($wajibpajak["masa_pajak"])); ?>" class="form-control" readonly>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="jenis" clas="form-label">Jenis</label>
@@ -126,7 +126,7 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-4 mb-3">
                   <label for="tgl_terima" clas="form-label">Tanggal Terima</label>
-                  <input type="date" name="tgl_terima" id="tgl_terima" value="<?php echo $wajibpajak["tgl_terima"]; ?>" class="form-control" readonly>
+                  <input type="text" name="tgl_terima" id="tgl_terima" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_terima"])); ?>" class="form-control" readonly>
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="tgl_tahap_1" clas="form-label">Tanggal Tahap 1</label>
