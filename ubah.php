@@ -146,7 +146,7 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="ket" clas="form-label">Keterangan</label>
-                  <textarea name="ket" id="ket" value="<?php echo $wajibpajak["ket"]; ?>" class="form-control" rows="6"></textarea>
+                  <textarea name="ket" id="ket" class="form-control" rows="6"><?php echo $wajibpajak["ket"]; ?></textarea>
                 </div>
                 <div class="col-lg-12 d-flex align-items-center">
                   <a href="index.php" class="btn btn-secondary">Kembali</a>
