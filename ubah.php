@@ -129,11 +129,11 @@ if(isset($_POST['ubah'])) {
                   <input type="text" name="tgl_terima" id="tgl_terima" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_terima"])); ?>" class="form-control" readonly>
                 </div>
                 <div class="col-lg-6 mb-3">
-                  <label for="tgl_tahap_1" clas="form-label">Tanggal Tahap 1</label>
+                  <label for="tgl_tahap_1" clas="form-label">Tanggal SKPPKP</label>
                   <input type="date" name="tgl_tahap_1" id="tgl_tahap_1" value="<?php echo $wajibpajak["tgl_tahap_1"]; ?>" class="form-control">
                 </div>
                 <div class="col-lg-6 mb-3">
-                  <label for="tgl_tahap_2" clas="form-label">Tanggal Tahap 2</label>
+                  <label for="tgl_tahap_2" clas="form-label">Tanggal SKPKPP</label>
                   <input type="date" name="tgl_tahap_2" id="tgl_tahap_2" value="<?php echo $wajibpajak["tgl_tahap_2"]; ?>" class="form-control">
                 </div>
                 <div class="col-lg-6 mb-3">

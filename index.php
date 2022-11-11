@@ -91,12 +91,12 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
                             <th>Jenis</th>
                             <th>Pembetulan</th>
                             <th>Tanggal Terima</th>
-                            <th>Jatuh Tempo Tahap 1</th>
-                            <th>Waktu Tersisa Tahap 1</th>
-                            <th>Tanggal Tahap 1</th>
-                            <th>Jatuh Tempo Tahap 2</th>
-                            <th>Waktu Tersisa Tahap 2</th>
-                            <th>Tanggal Tahap 2</th>
+                            <th>Jatuh Tempo SKPPKP</th>
+                            <th>Waktu Tersisa SKPPKP</th>
+                            <th>Tanggal SKPPKP</th>
+                            <th>Jatuh Tempo SKPKPP</th>
+                            <th>Waktu Tersisa SKPKPP</th>
+                            <th>Tanggal SKPKPP</th>
                             <th>Petugas</th>
                             <th>Keterangan</th>
                             <th>Status</th>
@@ -252,12 +252,12 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
     <div class="modal-content">
       <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo Tahap 1!</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo SKPPKP!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-4">
           <ul>
-            Ada permohonan, jatuh tempo 1 kurang dari 10 hari. Silahkan cek!
+            Ada permohonan, jatuh tempo SKPPKP kurang dari 10 hari. Silahkan cek!
           </ul>
         </div>
         <div class="modal-footer">
@@ -274,12 +274,12 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
     <div class="modal-content">
       <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo Tahap 2!</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo SKPKPP!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-4">
           <ul>
-            Ada permohonan, jatuh tempo 2 kurang dari 10 hari. Silahkan cek!
+            Ada permohonan, jatuh tempo SKPKPP kurang dari 10 hari. Silahkan cek!
           </ul>
         </div>
         <div class="modal-footer">

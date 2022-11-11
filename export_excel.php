@@ -37,12 +37,12 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
       <th>Sumber</th>
       <th>Pembetulan</th>
       <th>Tanggal Terima</th>
-      <th>Jatuh Tempo Tahap 1</th>
-      <th>Waktu Tersisa Tahap 1</th>
-      <th>Tanggal Tahap 1</th>
-      <th>Jatuh Tempo Tahap 2</th>
-      <th>Waktu Tersisa Tahap 2</th>
-      <th>Tanggal Tahap 2</th>
+      <th>Jatuh Tempo SKPPKP</th>
+      <th>Waktu Tersisa SKPPKP</th>
+      <th>Tanggal SKPPKP</th>
+      <th>Jatuh Tempo SKPKPP</th>
+      <th>Waktu Tersisa SKPKPP</th>
+      <th>Tanggal SKPKPP</th>
       <th>Petugas</th>
       <th>Keterangan</th>
       <th>Status</th>
