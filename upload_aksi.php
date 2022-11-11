@@ -30,7 +30,6 @@ $jumlah_baris = $data->rowcount($sheet_index=0);
 // PHPExcel_Shared_Date::ExcelToPHPObject(42104.592743056);
 $berhasil = 0;
 for ($i=2; $i<=$jumlah_baris; $i++){
-	$UNIX_DATE = ($EXCEL_DATE - 25569) * 86400;
 
 	// menangkap data dan memasukkan ke variabel sesuai dengan kolumnya masing-masing
 	$npwp = str_replace([".", "-", "/"], "", $data->val($i, 2));
