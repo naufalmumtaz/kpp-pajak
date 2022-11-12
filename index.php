@@ -8,9 +8,11 @@ session_start();
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%'");
-$tgl_terakhir_diupdate = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak ORDER BY tgl_terima DESC");
-$row = mysqli_fetch_array($tgl_terakhir_diupdate);
+$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%' ORDER BY id DESC");
+$tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
+$tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
+$tgl_terakhir_diupdate_masa_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_masa);
+$tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_tahunan);
 
 ?>
 <!DOCTYPE html>
@@ -70,7 +72,10 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
               <div class="row">
                 <div class="col-12">
                   <h2>Daftar WP Pengembalian Pendahuluan</h2>
-                  <p>Data Terakhir Diupdate : <?php echo date("d-m-Y", strtotime($row[0])); ?></p>
+                  <div class="d-flex">
+                    <p>Data Terakhir Diupdate : Masa <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_masa_fetch[0])); ?></p>
+                    <p class="ms-3">Tahunan : <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_tahunan_fetch[0])); ?></p>
+                  </div>
                 </div>
               </div>
               <div class="row mt-3">
@@ -251,7 +256,7 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
-        <div class="modal-header">
+        <div class="modal-header bg-danger">
           <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo SKPPKP!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -273,7 +278,7 @@ $row = mysqli_fetch_array($tgl_terakhir_diupdate);
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="upload_aksi.php" method="post" enctype="multipart/form-data">
-        <div class="modal-header">
+        <div class="modal-header bg-warning">
           <h5 class="modal-title" id="exampleModalLabel">Peringatan Jatuh Tempo SKPKPP!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

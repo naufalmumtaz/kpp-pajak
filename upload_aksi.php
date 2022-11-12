@@ -54,5 +54,10 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 unlink($_FILES['import_file']['name']);
 
 // alihkan halaman ke index.php
-header("location:index.php?berhasil=$berhasil");
+echo "
+<script>
+	alert('Data berhasil diimpor!');
+	document.location.href = 'index.php';
+</script>
+";
 ?>
