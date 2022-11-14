@@ -166,7 +166,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
                                     } else {
-                                      $_SESSION["alert_pkp"] = false;
+                                      $_SESSION["alert_pkp"] = [];
                                     }
                                   }
                               ?></td>
@@ -204,7 +204,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert_kpp"] = true;
                                     } else {
-                                      $_SESSION["alert_kpp"] = false;
+                                      $_SESSION["alert_kpp"] = [];
                                     }
                                   }
                                 }
@@ -254,15 +254,15 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
     $(document).ready(function() {
       $("#alertModal").modal("show");
     });
-    </script>
+  </script>
 <?php endif ?>
 
 <?php if(isset($_SESSION["alert_kpp"])) : ?>
-  <script>
+    <script>
     $(document).ready(function() {
-      $("#alertModal2").modal("show");
+      $("#alertModal").modal("show");
     });
-    </script>
+  </script>
 <?php endif ?>
 
 <!-- alertModal -->
