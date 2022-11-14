@@ -164,9 +164,9 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                           
                                     echo $waktu_tersisa_1->format('%d');
                                     if($waktu_tersisa_1->days <= 10) {
-                                      $_SESSION["alert"] = true;
+                                      $_SESSION["alert_pkp"] = true;
                                     } else {
-                                      $_SESSION["alert"] = false;
+                                      $_SESSION["alert_pkp"] = false;
                                     }
                                   }
                               ?></td>
@@ -199,12 +199,12 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                           
                                     $current = date_create("NOW");
                                     $waktu_tersisa_2 = date_diff($createDate, $current);
-
+                          
                                     echo $waktu_tersisa_2->format('%d');
                                     if($waktu_tersisa_2->days <= 10) {
-                                      $_SESSION["alert2"] = true;
+                                      $_SESSION["alert_kpp"] = true;
                                     } else {
-                                      $_SESSION["alert2"] = false;
+                                      $_SESSION["alert_kpp"] = false;
                                     }
                                   }
                                 }
@@ -249,7 +249,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
   </div>
 </section>
 
-<?php if(isset($_SESSION["alert"])) : ?>
+<?php if(isset($_SESSION["alert_pkp"])) : ?>
   <script>
     $(document).ready(function() {
       $("#alertModal").modal("show");
@@ -257,7 +257,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
     </script>
 <?php endif ?>
 
-<?php if(isset($_SESSION["alert2"])) : ?>
+<?php if(isset($_SESSION["alert_kpp"])) : ?>
   <script>
     $(document).ready(function() {
       $("#alertModal2").modal("show");
