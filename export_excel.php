@@ -10,7 +10,7 @@ require 'functions.php';
 header("Content-type: application/vnd-ms-excel");
 header("Content-Disposition: attachment; filename=Data Wajib Pajak.xls");
 
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp");
+$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%'");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp
     <?php foreach($wajibpajak as $wb) : ?>
       <tr>
         <td><?php echo $i; ?></td>
-        <td><?php echo $wb["npwp"]; ?></td>
+        <td><?php echo formatNpwp($wb["npwp"]); ?></td>
         <td><?php echo $wb["nama_wp"] ?></td>
         <td><?php echo $wb["bps"]; ?></td>
         <td><?php echo date("d-m-Y", strtotime($wb["tgl_spt"])); ?></td>

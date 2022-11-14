@@ -8,7 +8,7 @@ session_start();
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%' ORDER BY id DESC");
+$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_masa);
@@ -73,7 +73,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                 <div class="col-12">
                   <h2>Daftar WP Pengembalian Pendahuluan</h2>
                   <div class="d-flex">
-                    <p>Data Terakhir Diupdate : Masa <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_masa_fetch[0])); ?></p>
+                    <p>Tgl Terakhir Diupdate : Masa : <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_masa_fetch[0])); ?></p>
                     <p class="ms-3">Tahunan : <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_tahunan_fetch[0])); ?></p>
                   </div>
                 </div>
@@ -90,17 +90,17 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                             <th>NPWP</th>
                             <th>Nama</th>
                             <th>No BPS</th>
-                            <th>Tanggal SPT</th>
                             <th>Nilai LB</th>
+                            <th>Jenis SPT</th>
                             <th>Masa Pajak</th>
                             <th>Jenis</th>
-                            <th>Pembetulan</th>
+                            <th>Pbtl</th>
                             <th>Tanggal Terima</th>
                             <th>Jatuh Tempo SKPPKP</th>
-                            <th>Waktu Tersisa SKPPKP</th>
+                            <th>Sisa Waktu SKPPKP (hari)</th>
                             <th>Tanggal SKPPKP</th>
                             <th>Jatuh Tempo SKPKPP</th>
-                            <th>Waktu Tersisa SKPKPP</th>
+                            <th>Sisa Waktu SKPKPP (hari)</th>
                             <th>Tanggal SKPKPP</th>
                             <th>Petugas</th>
                             <th>Keterangan</th>
@@ -115,11 +115,25 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                               <?php if(isset($_SESSION["login"])) : ?>
                                 <td><a href="ubah.php?id=<?php echo $wb["id"]; ?>" class="btn btn-primary btn-sm">Edit</a></td>
                               <?php endif; ?>
-                              <td><?php echo $wb["npwp"]; ?></td>
+                              <td><?php echo formatNpwp($wb["npwp"]); ?></td>
                               <td><?php echo $wb["nama_wp"] ?></td>
                               <td><?php echo $wb["bps"]; ?></td>
-                              <td><?php echo date("d-m-Y", strtotime($wb["tgl_spt"])); ?></td>
                               <td><?php echo $wb["nilai_lb"]; ?></td>
+                              <td>
+                                <?php
+                                  if(substr($wb["bps"], 11, 5) == "PPTOP") {
+                                    echo "Tahunan PPh OP";
+                                  } else if(substr($wb["bps"], 11, 6) == "PPTOPS") {
+                                    echo "Tahunan PPh OPS";
+                                  } else if(substr($wb["bps"], 11, 3) == "PPN") {
+                                    echo "Masa PPN";
+                                  } else if(substr($wb["bps"], 11, 3) == "PPW") {
+                                    echo "Tahunan PPh Badan";
+                                  } else {
+                                    echo "-";
+                                  }
+                                ?>
+                              </td>
                               <td><?php echo date("M-Y", strtotime($wb["masa_pajak"])); ?></td>
                               <td><?php echo $wb["jenis"]; ?></td>
                               <td><?php echo $wb["pembetulan"]; ?></td>
@@ -148,7 +162,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     $current = date_create("NOW");
                                     $waktu_tersisa_1 = date_diff($createDate, $current);
                           
-                                    echo $waktu_tersisa_1->format('%d hari');
+                                    echo $waktu_tersisa_1->format('%d');
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert"] = true;
                                     } else {
@@ -186,7 +200,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     $current = date_create("NOW");
                                     $waktu_tersisa_2 = date_diff($createDate, $current);
 
-                                    echo $waktu_tersisa_2->format('%d hari');
+                                    echo $waktu_tersisa_2->format('%d');
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert2"] = true;
                                     } else {

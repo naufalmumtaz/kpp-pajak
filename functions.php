@@ -13,6 +13,13 @@ function query($query) {
 
   return $rows;
 }
+function formatNpwp($string) {
+  $digit1 = substr($string, 0, 9);
+  $digit2 = substr($string, 9, 3);
+  $digit3 = substr($string, 12, 3);
+  
+  return $digit1 . "-" . $digit2 . "." . $digit3;
+}
 function tambahWajibPajak($data) {
   global $conn;
 
