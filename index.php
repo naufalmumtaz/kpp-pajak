@@ -33,7 +33,10 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">KPP Pratama Karanganyar</a>
+    <a class="navbar-brand" href="#">
+      <img src="images/logo.png" alt="logo" style="width: 1.5em; margin-right: 0.5em;" class="flex items-center">
+      KPP Pratama Karanganyar
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
