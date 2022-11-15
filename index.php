@@ -1,10 +1,5 @@
 <?php
 session_start();
-// if(!isset($_SESSION["login"])) {
-//   header("Location: login.php");
-//   exit;
-// }
-
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
@@ -21,7 +16,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Wajib Pajak - Admin</title>
+  <title>Daftar Wajib Pajak Pengembalian Pendahuluan</title>
 
   <?php include('includes/style.html'); ?>
   <?php include('includes/script.html'); ?>
@@ -49,7 +44,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a href="tambah.php" class="dropdown-item">Tambah Data</a></li>
-            <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal">Impor Data</button></li>
+              <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#imporModal">Impor Data</button></li>
               <li><button type="button" class="dropdown-item text-dark" data-bs-toggle="modal" data-bs-target="#exportModal">Expor Data</button></li>
               <hr>
               <li><button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
@@ -169,7 +164,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
                                     } else {
-                                      $_SESSION["alert_pkp"] = [];
+                                      unset($_SESSION["alert_pkp"]);
                                     }
                                   }
                               ?></td>
@@ -207,7 +202,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert_kpp"] = true;
                                     } else {
-                                      $_SESSION["alert_kpp"] = [];
+                                      unset($_SESSION["alert_kpp"]);
                                     }
                                   }
                                 }
@@ -326,7 +321,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-          <button type="submit" name="upload" class="btn btn-success">Upload</button>
+          <button type="submit" name="import" class="btn btn-success">Upload</button>
         </div>
       </form>
     </div>
