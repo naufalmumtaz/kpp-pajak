@@ -151,16 +151,12 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                   if($wb["tgl_tahap_1"] != "0000-00-00") {
                                     echo "-";
                                   } else {
-                                    $date = $jatuhtempo_tahap_1;
-                                    $explodeDate = explode('-', $date);
-                                    $explodeDate[0] -= 1;
-                                    $implodeDate = implode('-', $explodeDate);
-                                    $createDate = date_create($implodeDate);
-                          
-                                    $current = date_create("NOW");
+                                    $createDate = date_create($jatuhtempo_tahap_1);
+                                    $current = date_create("TODAY");
                                     $waktu_tersisa_1 = date_diff($createDate, $current);
                           
                                     echo $waktu_tersisa_1->format('%d');
+                                    
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
                                     } else {
@@ -189,13 +185,8 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                   if($wb["tgl_tahap_1"] != "0000-00-00" && $wb["tgl_tahap_2"] != "0000-00-00") {
                                     echo "-";
                                   } else {
-                                    $date = $jatuhtempo_tahap_2;
-                                    $explodeDate = explode('-', $date);
-                                    $explodeDate[0] -= 1;
-                                    $implodeDate = implode('-', $explodeDate);
-                                    $createDate = date_create($implodeDate);
-                          
-                                    $current = date_create("NOW");
+                                    $createDate = date_create($jatuhtempo_tahap_2);
+                                    $current = date_create("TODAY");
                                     $waktu_tersisa_2 = date_diff($createDate, $current);
                           
                                     echo $waktu_tersisa_2->format('%d');
