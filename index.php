@@ -71,8 +71,8 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                 <div class="col-12">
                   <h2>Daftar WP Pengembalian Pendahuluan</h2>
                   <div class="d-flex">
-                    <p>Tgl Terakhir Diupdate : Masa : <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_masa_fetch[0])); ?></p>
-                    <p class="ms-3">Tahunan : <?php echo date("d-m-Y", strtotime($tgl_terakhir_diupdate_tahunan_fetch[0])); ?></p>
+                    <p>Tgl Terakhir Diupdate : Masa : <?php echo $tgl_terakhir_diupdate_masa_fetch != "" ? date("d-m-Y", strtotime($tgl_terakhir_diupdate_masa_fetch[0])) : "-"; ?></p>
+                    <p class="ms-3">Tahunan : <?php echo $tgl_terakhir_diupdate_tahunan_fetch != "" ? date("d-m-Y", strtotime($tgl_terakhir_diupdate_tahunan_fetch[0])) : "-"; ?></p>
                   </div>
                 </div>
               </div>

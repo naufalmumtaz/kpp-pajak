@@ -18,6 +18,7 @@ include "excel_reader2.php";
 $target = basename($_FILES['import_file']['name']) ;
 move_uploaded_file($_FILES['import_file']['tmp_name'], $target);
 
+
 // beri permisi agar file xls dapat di baca
 chmod($_FILES['import_file']['name'],0777);
 
