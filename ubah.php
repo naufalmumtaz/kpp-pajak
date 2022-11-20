@@ -109,7 +109,7 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="tgl_spt" clas="form-label">Tanggal SPT</label>
-                  <input type="text" name="tgl_spt" id="tgl_spt" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_spt"])); ?>" class="form-control" readonly>
+                  <input type="text" name="tgl_spt" id="tgl_spt" value="<?php echo $wajibpajak["tgl_spt"] == NULL ? "-" : date("d-m-Y", strtotime($wajibpajak["tgl_spt"])); ?>" class="form-control" readonly>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="masa_pajak" clas="form-label">Masa Pajak</label>
@@ -131,20 +131,33 @@ if(isset($_POST['ubah'])) {
                   <label for="tgl_terima" clas="form-label">Tanggal Terima</label>
                   <input type="text" name="tgl_terima" id="tgl_terima" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_terima"])); ?>" class="form-control" readonly>
                 </div>
-                <div class="col-lg-6 mb-3">
+                <div class="col-lg-3 mb-3">
                   <label for="tgl_tahap_1" clas="form-label">Tanggal SKPPKP</label>
                   <input type="date" name="tgl_tahap_1" id="tgl_tahap_1" value="<?php echo $wajibpajak["tgl_tahap_1"]; ?>" class="form-control">
                 </div>
-                <div class="col-lg-6 mb-3">
+                <div class="col-lg-3 mb-3">
                   <label for="tgl_tahap_2" clas="form-label">Tanggal SKPKPP</label>
                   <input type="date" name="tgl_tahap_2" id="tgl_tahap_2" value="<?php echo $wajibpajak["tgl_tahap_2"]; ?>" class="form-control">
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="petugas" clas="form-label">Petugas</label>
                   <select name="petugas" id="petugas" class="form-select">
+                    <option value="-" disabled selected>---Pilih Petugas---</option>
                     <?php foreach ($users as $user) : ?>
-                      <option value="<?= $user['nama'] ?>" <?= $user['nama'] === $wajibpajak['petugas'] ? 'selected' : '';?>><?= $user['nama'] ?></option>
+                      <?php if($wajibpajak["petugas"] === $user["nama"]) : ?>
+                        <option value="<?php echo $user["nama"] ?>" selected><?php echo $user["nama"] ?></option>
+                      <?php else : ?>
+                        <option value="<?php echo $user["nama"] ?>"><?php echo $user["nama"] ?></option>
+                      <?php endif; ?>
                     <?php endforeach; ?>
+                  </select>
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <label for="batal" clas="form-label">Alasan Batal</label>
+                  <select name="batal" id="batal" class="form-select">
+                    <option value="-" disabled selected>---Pilih Alasan---</option>
+                    <option <?php if ($wajibpajak["batal"] == "Pembetulan") { echo 'selected'; }?> value="Pembetulan">Pembetulan</option>
+                    <option <?php if ($wajibpajak["batal"] == "Pemeriksaan") { echo 'selected'; }?> value="Pemeriksaan">Pemeriksaan</option>
                   </select>
                 </div>
                 <div class="col-lg-6 mb-3">

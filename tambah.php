@@ -8,10 +8,9 @@ if(!isset($_SESSION["login"])) {
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp");
 $users = query("SELECT * FROM users");
 
-if(isset($_POST['ubah'])) {
+if(isset($_POST['tambah'])) {
   if(tambahWajibPajak($_POST) > 0) {
     echo "
       <script>
@@ -36,7 +35,7 @@ if(isset($_POST['ubah'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tambah Wajib Pajak - Admin</title>
+  <title>Tambah Data Manual - SKPLB dan PLB</title>
 
   <?php include('includes/style.html'); ?>
 </head>
@@ -82,48 +81,56 @@ if(isset($_POST['ubah'])) {
       <div class="col-12 col-lg-12">
         <div class="row">
           <div class="col-12 d-flex align-items-center">
-            <h2>Tambah Wajib Pajak</h2>
+            <h2>Tambah Data Manual - SKPLB dan PLB</h2>
           </div>
         </div>
         <div class="row mt-3">
           <div class="col-10">
             <form action="" method="post" autocomplete="off">
               <div class="row">
-                <div class="col-lg-6 mb-3">
+                <div class="col-lg-4 mb-3">
                   <label for="npwp" clas="form-label">NPWP</label>
                   <input type="text" name="npwp" id="npwp" class="form-control">
                 </div>
-                <!-- <div class="col-lg-4 mb-3">
-                  <label for="nama_wp" clas="form-label">Nama</label>
-                  <input type="text" name="nama_wp" id="nama_wp" class="form-control" readonly>
-                </div> -->
-                <div class="col-lg-6 mb-3">
-                  <label for="bps" clas="form-label">No BPS</label>
+                <div class="col-lg-4 mb-3">
+                  <label for="bps" clas="form-label">No Ketetapan / Keputusan</label>
                   <input type="text" name="bps" id="bps" class="form-control">
+                </div>
+                <div class="col-lg-4 mb-3">
+                  <label for="jenis" clas="form-label">Jenis</label>
+                  <select name="jenis" id="jenis" class="form-select">
+                    <option value="SKPLB">SKPLB</option>
+                    <option value="PLB">PLB</option>
+                  </select>
                 </div>
                 <div class="col-lg-4 mb-3">
                   <label for="nilai_lb" clas="form-label">Nilai LB</label>
                   <input type="text" name="nilai_lb" id="nilai_lb" class="form-control">
                 </div>
                 <div class="col-lg-4 mb-3">
-                  <label for="tgl_terima" clas="form-label">Tanggal Terima</label>
-                  <input type="date" name="tgl_terima" id="tgl_terima" class="form-control">
+                  <label for="masa_pajak" clas="form-label">Masa Pajak</label>
+                  <input type="date" name="masa_pajak" id="masa_pajak" class="form-control">
                 </div>
                 <div class="col-lg-4 mb-3">
+                  <label for="tgl_terima" clas="form-label">Ketetapan / Keputusan</label>
+                  <input type="date" name="tgl_terima" id="tgl_terima" class="form-control">
+                </div>
+                <div class="col-lg-6 mb-3">
                   <label for="petugas" clas="form-label">Petugas</label>
                   <select name="petugas" id="petugas" class="form-select">
+                    <option value="-" disabled selected>---Pilih Petugas---</option>
                     <?php foreach ($users as $user) : ?>
                       <option value="<?php echo $user["nama"] ?>"><?php echo $user["nama"] ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>
-                <div class="col-lg-12 mb-3">
+                <div class="col-lg-6 mb-3">
                   <label for="ket" clas="form-label">Keterangan</label>
-                  <textarea name="ket" id="ket" value="<?php echo $wajibpajak["ket"]; ?>" class="form-control" rows="6"></textarea>
+                  <textarea name="ket" id="ket" class="form-control" rows="6"></textarea>
                 </div>
                 <div class="col-lg-12 d-flex align-items-center">
                   <a href="index.php" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" name="ubah" class="btn btn-success ms-3" onclick="return confirm('Yakin ingin menambah?');">Submit</button>
+                  <button type="submit" name="tambah" class="btn btn-success ms-3" onclick="return confirm('Yakin ingin menambah?');">Submit</button>
                 </div>
               </div>
             </form>

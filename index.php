@@ -3,7 +3,7 @@ session_start();
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%' ORDER BY tgl_terima DESC");
+$wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_masa);
@@ -61,11 +61,11 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
 </nav>
 
 <section style="margin-top:5em;">
-  <div class="container">
-    <div class="row">
+  <div class="px-5">
+    <div class="container">
       <div class="col-12 col-lg-12">
         <div class="row">
-          <div class="col-12 table-responsive">
+          <div class="col-12">
             <div class="py-2">
               <div class="row">
                 <div class="col-12">
@@ -78,8 +78,8 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
               </div>
               <div class="row mt-3">
                 <div class="col-12">
-                  <div>
-                    <div class="table-responsive">
+                  <div class="container">
+                    <div class="table-responsive scroll-horizontal scroll-vertical">
                       <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-bordered table-hover">
                         <thead>
                           <tr>
@@ -102,6 +102,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                             <th>Tanggal SKPKPP</th>
                             <th>Petugas</th>
                             <th>Keterangan</th>
+                            <th>Batal Pengembalian</th>
                             <th>Status</th>
                           </tr>
                         </thead>
@@ -111,7 +112,10 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                             <tr>
                               <td><?php echo $i; ?></td>
                               <?php if(isset($_SESSION["login"])) : ?>
-                                <td><a href="ubah.php?id=<?php echo $wb["id"]; ?>" class="btn btn-primary btn-sm">Edit</a></td>
+                                <td>
+                                  <a href="ubah.php?id=<?php echo $wb["id"]; ?>" class="btn btn-primary btn-sm">Edit</a>
+                                  <!-- <a href="hapus.php?id=<?php echo $wb["id"]; ?>" class="btn btn-danger btn-sm mt-1" onclick="return confirm('Yakin untuk menghapus data <?php echo $wb['nama_wp']; ?>, No BPS: <?php echo $wb['bps']; ?>?');">Hapus</a> -->
+                                </td>
                               <?php endif; ?>
                               <td><?php echo formatNpwp($wb["npwp"]); ?></td>
                               <td><?php echo $wb["nama_wp"] ?></td>
@@ -212,14 +216,17 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                 <?php echo $wb["petugas"] == "" ? "-" : $wb["petugas"]; ?>
                               </td>
                               <td><?php echo $wb["ket"] == "" ? "-" : $wb["ket"]; ?></td>
+                              <td><?php echo $wb["batal"] == "" ? "-" : $wb["batal"]; ?></td>
                               <td>
-                                <?php if($wb["petugas"] == "") : ?>
-                                  <?php echo "Open"; ?>
-                                <?php elseif($wb["petugas"] != "" && $wb["tgl_tahap_2"] == "0000-00-00") : ?>
-                                  <?php echo "Process"; ?>
-                                <?php elseif($wb["tgl_tahap_2"] != "0000-00-00" && $wb["petugas"] != "") : ?>
-                                  <?php echo "Closed"; ?>
-                                <?php endif; ?>
+                                <?php
+                                  if($wb["batal"] == "" && $wb["petugas"] == "") {
+                                    echo "Open";
+                                  } else if($wb["batal"] == "" && $wb["petugas"] != "" && $wb["tgl_tahap_2"] == "0000-00-00") {
+                                    echo "Process";
+                                  } else if($wb["batal"] != "" || $wb["tgl_tahap_2"] != "0000-00-00" && $wb["petugas"] != "") {
+                                    echo "Closed";
+                                  }
+                                ?>
                               </td>
                             </tr>
                             <?php $i++; ?>

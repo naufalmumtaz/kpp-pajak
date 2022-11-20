@@ -10,7 +10,7 @@ require 'functions.php';
 header("Content-type: application/vnd-ms-excel");
 header("Content-Disposition: attachment; filename=Data Wajib Pajak.xls");
 
-$wajibpajak = query("SELECT * FROM wajibpajak, npwp WHERE wajibpajak.npwp = npwp.npwp AND jenis LIKE '%Pengembalian%'");
+$wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY tgl_terima DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
