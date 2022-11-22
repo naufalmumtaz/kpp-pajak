@@ -93,7 +93,7 @@ if(isset($_POST['tambah'])) {
                   <input type="text" name="npwp" id="npwp" class="form-control">
                 </div>
                 <div class="col-lg-4 mb-3">
-                  <label for="bps" clas="form-label">No Ketetapan / Keputusan</label>
+                  <label for="bps" clas="form-label">No BPS</label>
                   <input type="text" name="bps" id="bps" class="form-control">
                 </div>
                 <div class="col-lg-4 mb-3">
@@ -112,8 +112,8 @@ if(isset($_POST['tambah'])) {
                   <input type="date" name="masa_pajak" id="masa_pajak" class="form-control">
                 </div>
                 <div class="col-lg-4 mb-3">
-                  <label for="tgl_terima" clas="form-label">Ketetapan / Keputusan</label>
-                  <input type="date" name="tgl_terima" id="tgl_terima" class="form-control">
+                  <label for="tgl_tahap_1" clas="form-label">Tanggal Ketetapan / Keputusan</label>
+                  <input type="date" name="tgl_tahap_1" id="tgl_tahap_1" class="form-control">
                 </div>
                 <div class="col-lg-6 mb-3">
                   <label for="petugas" clas="form-label">Petugas</label>

@@ -28,11 +28,11 @@ function tambahWajibPajak($data) {
 	$nilai_lb = htmlspecialchars($data['nilai_lb']);
   $masa_pajak = htmlspecialchars($data['masa_pajak']);
   $jenis = htmlspecialchars($data["jenis"]);
-	$tgl_terima = htmlspecialchars($data['tgl_terima']);
+	$tgl_tahap_1 = htmlspecialchars($data['tgl_tahap_1']);
 	$petugas = htmlspecialchars($data['petugas']);
 	$ket = htmlspecialchars($data['ket']);
 
-	$query = "INSERT INTO wajibpajak (npwp, bps, nilai_lb, masa_pajak, jenis, tgl_terima, petugas, ket) VALUES('$npwp', '$bps', '$nilai_lb', '$masa_pajak', '$jenis', '$tgl_terima', '$petugas', '$ket')";
+	$query = "INSERT INTO wajibpajak (npwp, bps, nilai_lb, masa_pajak, jenis, tgl_tahap_1, petugas, ket) VALUES('$npwp', '$bps', '$nilai_lb', '$masa_pajak', '$jenis', '$tgl_tahap_1', '$petugas', '$ket')";
   mysqli_query($conn, $query);
 
   return mysqli_affected_rows($conn);
@@ -43,20 +43,20 @@ function ubahWajibPajak($data) {
   $id = $data['id'];
 	$npwp = htmlspecialchars($data['npwp']);
 	$bps = htmlspecialchars($data['bps']);
-	// $tgl_spt = htmlspecialchars($data['tgl_spt']);
+	$tgl_spt = htmlspecialchars($data['tgl_spt']);
 	$nilai_lb = htmlspecialchars($data['nilai_lb']);
-	// $masa_pajak = htmlspecialchars($data['masa_pajak']);
+	$masa_pajak = htmlspecialchars($data['masa_pajak']);
 	$jenis = htmlspecialchars($data['jenis']);
 	$sumber = htmlspecialchars($data['sumber']);
 	$pembetulan = htmlspecialchars($data['pembetulan']);
-	// $tgl_terima = htmlspecialchars($data['tgl_terima']);
+	$tgl_terima = htmlspecialchars($data['tgl_terima']);
 	$tgl_tahap_1 = htmlspecialchars($data['tgl_tahap_1']);
 	$tgl_tahap_2 = htmlspecialchars($data['tgl_tahap_2']);
 	$petugas = htmlspecialchars($data['petugas']);
 	$ket = htmlspecialchars($data['ket']);
 	$batal = htmlspecialchars($data['batal']);
 
-	$query = "UPDATE wajibpajak SET npwp = '$npwp', bps = '$bps', nilai_lb = '$nilai_lb', jenis = '$jenis', sumber = '$sumber', pembetulan = '$pembetulan', tgl_tahap_1 = '$tgl_tahap_1', tgl_tahap_2 = '$tgl_tahap_2', petugas = '$petugas', ket = '$ket', batal = '$batal' WHERE id = '$id'";
+	$query = "UPDATE wajibpajak SET npwp = '$npwp', bps = '$bps', tgl_spt = '$tgl_spt', nilai_lb = '$nilai_lb', masa_pajak = '$masa_pajak', jenis = '$jenis', sumber = '$sumber', pembetulan = '$pembetulan', tgl_terima = '$tgl_terima', tgl_tahap_1 = '$tgl_tahap_1', tgl_tahap_2 = '$tgl_tahap_2', petugas = '$petugas', ket = '$ket', batal = '$batal' WHERE id = '$id'";
   mysqli_query($conn, $query);
 
   return mysqli_affected_rows($conn);

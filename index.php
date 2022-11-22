@@ -3,7 +3,7 @@ session_start();
 require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
-$wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY tgl_terima DESC");
+$wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
 $tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_masa);
@@ -139,20 +139,22 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                               <td><?php echo date("M-Y", strtotime($wb["masa_pajak"])); ?></td>
                               <td><?php echo $wb["jenis"]; ?></td>
                               <td><?php echo $wb["pembetulan"]; ?></td>
-                              <td><?php echo date("d-m-Y", strtotime($wb["tgl_terima"])); ?></td>
+                              <td><?php echo $wb["tgl_terima"] != 0 ? date("d-m-Y", strtotime($wb["tgl_terima"])) : "-"; ?></td>
 
-                              <td><?php echo $jatuhtempo_tahap_1 = substr($wb["bps"], 11, 3) == "PPT" ? date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days')) : date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days')); ?></td>
-                              <!-- <td>
-                                <?php
-                                  if(substr($wb["bps"], 11, 3) == "PPT") {
-                                    echo date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days'));
+                              <!-- <td><?php echo $jatuhtempo_tahap_1 = substr($wb["bps"], 11, 3) == "PPT" ? date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days')) : date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days')); ?></td> -->
+                              <td>
+                                <?php 
+                                  $jatuhtempo_tahap_1 = substr($wb["bps"], 11, 3) == "PPT" ? date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days')) : date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days'));
+
+                                  if($wb["tgl_terima"] == 0) {
+                                    echo "-";
                                   } else {
-                                    echo date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days'));
+                                    echo $jatuhtempo_tahap_1;
                                   }
                                 ?>
-                              </td> -->
+                              </td>
                               <td><?php 
-                                  if($wb["tgl_tahap_1"] != "0000-00-00") {
+                                  if($wb["tgl_tahap_1"] != 0 || $jatuhtempo_tahap_1 == 0 || $wb["batal"] != "") {
                                     echo "-";
                                   } else {
                                     $createDate = date_create($jatuhtempo_tahap_1);
