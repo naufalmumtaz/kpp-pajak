@@ -129,7 +129,7 @@ if(isset($_POST['ubah'])) {
                 </div>
                 <div class="col-lg-4 mb-3">
                   <label for="tgl_terima" clas="form-label">Tanggal Terima</label>
-                  <input type="text" name="tgl_terima" id="tgl_terima" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_terima"])); ?>" class="form-control">
+                  <input type="date" name="tgl_terima" id="tgl_terima" value="<?php echo date("d-m-Y", strtotime($wajibpajak["tgl_terima"])); ?>" class="form-control">
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="tgl_tahap_1" clas="form-label">Tanggal SKPPKP</label>
