@@ -140,8 +140,6 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                               <td><?php echo $wb["jenis"]; ?></td>
                               <td><?php echo $wb["pembetulan"]; ?></td>
                               <td><?php echo $wb["tgl_terima"] != 0 ? date("d-m-Y", strtotime($wb["tgl_terima"])) : "-"; ?></td>
-
-                              <!-- <td><?php echo $jatuhtempo_tahap_1 = substr($wb["bps"], 11, 3) == "PPT" ? date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days')) : date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days')); ?></td> -->
                               <td>
                                 <?php 
                                   $jatuhtempo_tahap_1 = substr($wb["bps"], 11, 3) == "PPT" ? date("d-m-Y", strtotime($wb["tgl_terima"] . '+15 weekdays' . '-1 days')) : date("d-m-Y", strtotime($wb["tgl_terima"] . 'next month' . '-1 days'));

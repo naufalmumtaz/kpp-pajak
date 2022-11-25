@@ -2,3 +2,13 @@
 <script src="js/jquery-3.5.1.js"></script>
 <script src="js/jquery.dataTables.min.js""></script>
 <script src="js/dataTables.bootstrap5.min.js"></script>
+<script src="js/jquery.masknumber.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#nilai_lb").keyup(function() {
+    $(this).maskNumber({
+      integer: true, thousands: ","
+    });
+  });
+});
+</script>
