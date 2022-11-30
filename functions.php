@@ -25,7 +25,7 @@ function tambahWajibPajak($data) {
 
 	$npwp = htmlspecialchars($data['npwp']);
 	$bps = htmlspecialchars($data['bps']);
-	$nilai_lb = htmlspecialchars($data['nilai_lb']);
+	$nilai_lb = htmlspecialchars(str_replace([".", ","], "", $data['nilai_lb']));
   $masa_pajak = htmlspecialchars($data['masa_pajak']);
   $jenis = htmlspecialchars($data["jenis"]);
 	$tgl_tahap_1 = htmlspecialchars($data['tgl_tahap_1']);
@@ -44,7 +44,7 @@ function ubahWajibPajak($data) {
 	$npwp = htmlspecialchars($data['npwp']);
 	$bps = htmlspecialchars($data['bps']);
 	$tgl_spt = htmlspecialchars($data['tgl_spt']);
-	$nilai_lb = htmlspecialchars($data['nilai_lb']);
+	$nilai_lb = htmlspecialchars(str_replace([".", ","], "", $data['nilai_lb']));
 	$masa_pajak = htmlspecialchars($data['masa_pajak']);
 	$jenis = htmlspecialchars($data['jenis']);
 	$sumber = htmlspecialchars($data['sumber']);

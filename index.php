@@ -120,7 +120,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                               <td><?php echo formatNpwp($wb["npwp"]); ?></td>
                               <td><?php echo $wb["nama_wp"] ?></td>
                               <td><?php echo $wb["bps"]; ?></td>
-                              <td><?php echo $wb["nilai_lb"]; ?></td>
+                              <td><?php echo number_format($wb["nilai_lb"], 2, ",", ","); ?></td>
                               <td>
                                 <?php
                                   if(substr($wb["bps"], 11, 5) == "PPTOP") {
