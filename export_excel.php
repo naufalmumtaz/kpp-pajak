@@ -57,7 +57,7 @@ $wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp
         <td><?php echo $wb["nama_wp"] ?></td>
         <td><?php echo $wb["bps"]; ?></td>
         <td><?php echo date("d-m-Y", strtotime($wb["tgl_spt"])); ?></td>
-        <td><?php echo $wb["nilai_lb"]; ?></td>
+        <td><?php echo number_format($wb["nilai_lb"], 2, ",", ","); ?></td>
         <td><?php echo date("M-Y", strtotime($wb["masa_pajak"])); ?></td>
         <td><?php echo $wb["jenis"]; ?></td>
         <td><?php echo $wb["sumber"]; ?></td>

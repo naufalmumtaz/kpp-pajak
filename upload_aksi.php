@@ -36,7 +36,7 @@ for ($i=2; $i<=$jumlah_baris; $i++){
 	$npwp = str_replace([".", "-", "/"], "", $data->val($i, 2));
 	$bps = $data->val($i, 3);
 	$tgl_spt = date("Y-m-d", strtotime($data->val($i, 4)));
-	$nilai_lb = str_replace([".", ","], "", $data->val($i, 5));
+	$nilai_lb = str_replace([".", ",00"], "", $data->val($i, 5));
 	$masa_pajak = date("Y-m-d", strtotime($data->val($i, 6)));
 	$jenis = $data->val($i, 7);
 	$sumber = $data->val($i, 8);
