@@ -54,7 +54,7 @@ function ubahWajibPajak($data) {
 	$tgl_tahap_2 = htmlspecialchars($data['tgl_tahap_2']);
 	$petugas = htmlspecialchars($data['petugas']);
 	$ket = htmlspecialchars($data['ket']);
-	$batal = htmlspecialchars($data['batal']);
+	$batal = isset($data['batal']) ? htmlspecialchars($data['batal']) : "";
 
 	$query = "UPDATE wajibpajak SET npwp = '$npwp', bps = '$bps', tgl_spt = '$tgl_spt', nilai_lb = '$nilai_lb', masa_pajak = '$masa_pajak', jenis = '$jenis', sumber = '$sumber', pembetulan = '$pembetulan', tgl_terima = '$tgl_terima', tgl_tahap_1 = '$tgl_tahap_1', tgl_tahap_2 = '$tgl_tahap_2', petugas = '$petugas', ket = '$ket', batal = '$batal' WHERE id = '$id'";
   mysqli_query($conn, $query);
