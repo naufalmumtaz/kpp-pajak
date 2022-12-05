@@ -4,6 +4,9 @@ require 'functions.php';
 
 date_default_timezone_set('Asia/Jakarta');
 $wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
+
+$skpkp_due = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE DATEDIFF(tgl_terima + 30, CURDATE()) <= 10 AND jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
+
 $tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_masa_fetch = mysqli_fetch_array($tgl_terakhir_diupdate_masa);
@@ -164,7 +167,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
                                     } else {
-                                      unset($_SESSION["alert_pkp"]);
+                                      $_SESSION["alert_pkp"] = false;
                                     }
                                   }
                               ?></td>
@@ -197,7 +200,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert_kpp"] = true;
                                     } else {
-                                      unset($_SESSION["alert_kpp"]);
+                                      $_SESSION["alert_kpp"] = false;
                                     }
                                   }
                                 }
@@ -271,9 +274,9 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-4">
-          <ul>
-            Ada permohonan, jatuh tempo SKPPKP kurang dari 10 hari. Silahkan cek!
-          </ul>
+          <?php foreach($skpkp_due as $skppkp) : ?>
+            <p><?php echo $skppkp["bps"]; ?></p>
+          <?php endforeach; ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
