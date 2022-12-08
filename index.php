@@ -274,9 +274,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body py-4">
-          <?php foreach($skpkp_due as $skppkp) : ?>
-            <p><?php echo $skppkp["bps"]; ?></p>
-          <?php endforeach; ?>
+          Ada permohonan, jatuh tempo SKPPKP kurang dari 10 hari. Silahkan cek!
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
