@@ -5,7 +5,7 @@ require 'functions.php';
 date_default_timezone_set('Asia/Jakarta');
 $wajibpajak = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
 
-$skpkp_due = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE DATEDIFF(tgl_terima + 30, CURDATE()) <= 10 AND jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
+// $skpkp_due = query("SELECT * FROM wajibpajak INNER JOIN npwp ON wajibpajak.npwp = npwp.npwp WHERE DATEDIFF(tgl_terima + 30, CURDATE()) <= 10 AND jenis LIKE '%Pengembalian%' OR jenis LIKE '%PLB%' OR jenis LIKE '%SKPLB%' ORDER BY id DESC");
 
 $tgl_terakhir_diupdate_masa = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppn%' ORDER BY tgl_terima DESC");
 $tgl_terakhir_diupdate_tahunan = mysqli_query($conn, "SELECT tgl_terima FROM wajibpajak WHERE bps LIKE '%ppt%' OR bps LIKE '%ppw%' ORDER BY tgl_terima DESC");
@@ -162,7 +162,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     $current = date_create("TODAY");
                                     $waktu_tersisa_1 = date_diff($createDate, $current);
                           
-                                    echo $current >= $createDate ? "Terlambat" : $waktu_tersisa_1->format('%d');
+                                    echo $current >= $createDate ? "-" . $waktu_tersisa_1->format('%d') : $waktu_tersisa_1->format('%d');
                                     
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
