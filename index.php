@@ -196,7 +196,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     $current = date_create("TODAY");
                                     $waktu_tersisa_2 = date_diff($createDate, $current);
                           
-                                    echo $current >= $createDate ? "Terlambat" : $waktu_tersisa_1->format('%d');
+                                    echo $current >= $createDate ? "Terlambat" : $waktu_tersisa_2->format('%d');
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert_kpp"] = true;
                                     } else {
