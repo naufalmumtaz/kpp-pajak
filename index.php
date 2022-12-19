@@ -167,7 +167,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_1->days <= 10) {
                                       $_SESSION["alert_pkp"] = true;
                                     } else {
-                                      $_SESSION["alert_pkp"] = false;
+                                      unset($_SESSION["alert_pkp"]);
                                     }
                                   }
                               ?></td>
@@ -200,7 +200,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                                     if($waktu_tersisa_2->days <= 10) {
                                       $_SESSION["alert_kpp"] = true;
                                     } else {
-                                      $_SESSION["alert_kpp"] = false;
+                                      unset($_SESSION["alert_kkp"]);
                                     }
                                   }
                                 }
