@@ -84,7 +84,7 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
                 <div class="col-12">
                   <div class="container">
                     <div class="table-responsive scroll-horizontal scroll-vertical">
-                      <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-bordered table-hover">
+                      <table border="1" cellpadding="10" cellspacing="0" id="table" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>#</th>
