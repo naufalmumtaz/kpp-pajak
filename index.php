@@ -39,8 +39,9 @@ $tgl_terakhir_diupdate_tahunan_fetch = mysqli_fetch_array($tgl_terakhir_diupdate
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto gap-3">
         <?php if(isset($_SESSION["login"])) : ?>
+          <li class="nav-item"><a href="../agendasurat/suratkeluar/index.php" class="nav-link">Agenda Surat</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle pill-rounded" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="images/user.png" alt="icon" style="width:2em;">
